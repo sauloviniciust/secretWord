@@ -2,8 +2,12 @@ import { useCallback, useEffect, useState,} from "react";
 import { StartScreen } from "./components/StartScreen";
 import { Game } from "./components/Game";
 
-import { wordsList } from "./data/words.tsx";
 import GameOver from "./components/GameOver.tsx";
+
+
+interface WordsList {
+  [category: string]: string[];
+}
 
 const stages = [
   { id: 1, name: "start" },
@@ -15,12 +19,12 @@ const guessesNumber = 3;
 
 const App: React.FC = () => {
   const [gameStage, setGameStage] = useState(stages[0].name);
-  const [words] = useState<object>(wordsList);
+  const [words] = useState<WordsList>({});
   const [pickedWord, setPickedWord] = useState("");
   const [pickedCategory, setPickedCategory] = useState("");
-  const [letters, setLetters] = useState([]);
-  const [guessedLetters, setGuessedLetters] = useState([]);
-  const [wrongLetters, setWrongLetters] = useState([]);
+  const [letters, setLetters] = useState<string[]>([]); 
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [wrongLetters, setWrongLetters] = useState<string[]>([]);
   const [guesses, setGuesses] = useState(guessesNumber);
   const [score, setScore] = useState(0);
 
